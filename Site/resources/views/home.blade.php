@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  <h2>Hello User</h2>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
