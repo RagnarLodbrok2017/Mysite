@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use DB;
+use App\Admins;
 class LoginController extends Controller
 {
     /*
@@ -32,6 +33,20 @@ class LoginController extends Controller
      *
      * @return void
      */
+     public function checkLogin(Request $request)
+     {
+       $admin = DB::table('admins')->find($request->email);
+       if($admin)
+       {
+         if($admin->email == $request->email && $admin->password == $request->password)
+         {
+           return redirect('home');
+         }
+         else {
+           echo "No Admins With this Information";
+         }
+       }
+     }
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

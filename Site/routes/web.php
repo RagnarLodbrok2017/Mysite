@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('product/{id}', function($id){
+  $product = App\Products::find($id);
+  echo "the name is " . $product->name . " ";
+});
+Route::post('login','Auth\LoginController@checkLogin');
 Auth::routes();
-
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/products','UsersController@show');
 Route::get('home/products/{product}/delete','UsersController@delete');
