@@ -10,6 +10,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th class="text-center" scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -19,34 +20,40 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td><a href="products/{{$product->id}}/delete" type="button" class="btn btn-danger">Delete</a></td>
-                <form action="products/{{$product->id}}/update" method="POST">
-                  {{csrf_field()}}
-                  <div class="input-group">
-                    <td><input class="form-control" type="text" name="name" value="{{$product->name}}"></td>
-                    <td><input class="form-control" type="text" name="price" value="{{$product->price}}"></td>
-                    <td><span class="input-group-btn">
-                      <button class="btn btn-default" type="submit">update</button>
-                    </span></td>
-                  </div>
-                </form>
+                <td><a href="products/{{$product->id}}/edit" type="button" class="btn btn-default">Edit</a></td>
               </tr>
               @endforeach
             </tbody>
           </table>
         </div>
     </div>
-    <br><br><br><br>
-    <div class="text-center">
-      <td><a href="#" type="button" class="btn btn-primary">Search</a></td>
-      <br><br>
-        <form action="products/add" method="POST">
+  </br>
+    <div class="text-center col-xs-12">
+        <form class="col-xs-6" action="products/add" method="POST">
           {{csrf_field()}}
-          <div class="input-group col-xs-6">
+          <div class="input-group">
+            <div class="col-xs-7">
           <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
           <input class="form-control" type="text" name="price" value="" placeholder="price of Product:">
-          <span class="input-group-btn col-xs-6">
-				<button class="btn btn-default" type="submit">Add Product</button>
+        </div>
+        <div class="col-xs-5">
+          <span class="input-group-btn">
+				<button class="btn btn-success" type="submit">Add Product</button>
 			</span>
+    </div>
+        </div>
+        </form>
+        <form class="col-xs-6" action="products/{{$product->name}}/edit" method="GET">
+          {{csrf_field()}}
+          <div class="input-group">
+            <div class="col-xs-10">
+          <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
+        </div>
+        <div class="col-xs-2">
+          <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">Search</button>
+			</span>
+    </div>
         </div>
         </form>
     </div>
