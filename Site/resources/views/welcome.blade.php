@@ -61,7 +61,7 @@
               <a href="#about" class="btn btn-default page-scroll">Learn More</a>
               @if (Route::has('login'))
               @auth
-              <a  class="btn btn-default page-scroll" href="{{ url('/home') }}">Home</a>
+              <a  class="btn btn-default page-scroll" href="{{ url('/home/products') }}">Products</a>
               @else
               <a  class="btn btn-default page-scroll" href="{{ route('login') }}">Login</a>
               <a  class="btn btn-default page-scroll" href="{{ route('register') }}">Register</a>
