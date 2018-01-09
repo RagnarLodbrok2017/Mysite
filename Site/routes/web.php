@@ -19,7 +19,22 @@ Route::get('product/{id}', function($id){
   $product = App\Products::find($id);
   echo "the name is " . $product->name . " ";
 });
-Route::post('login','Auth\LoginController@checkLogin');
+Route::post('login',function(Request $request){
+  $admin = DB::table('admins')->find($request->email);
+  if($admin)
+  {
+    if($admin->email == $request->email && $admin->password == $request->password)
+    {
+      return redirect('home');
+    }
+    else {
+      echo "No Admins With this Information";
+    }
+  }
+} );
+Route::get('adminhome','AdminController@show');
+Route::post('adminhome/add','AdminController@add');
+Route::get('adminhome/{user}/delete','AdminController@delete');
 Auth::routes();
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/products','UsersController@show');

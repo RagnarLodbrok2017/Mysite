@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @return void
      */
-     public function checkLogin(Request $request)
+     /*public function checkLogin(Request $request)
      {
        $admin = DB::table('admins')->find($request->email);
        if($admin)
@@ -46,7 +46,7 @@ class LoginController extends Controller
            echo "No Admins With this Information";
          }
        }
-     }
+     }*/
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
