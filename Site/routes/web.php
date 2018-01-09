@@ -32,9 +32,11 @@ Route::post('login',function(Request $request){
     }
   }
 } );
-Route::get('adminhome','AdminController@show');
-Route::post('adminhome/add','AdminController@add');
-Route::get('adminhome/{user}/delete','AdminController@delete');
+Route::group(['middleware' => ['admin']], function() {
+  Route::get('adminhome','AdminController@show');
+  Route::post('adminhome/add','AdminController@add');
+  Route::get('adminhome/{user}/delete','AdminController@delete');
+});
 Auth::routes();
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/products','UsersController@show');
