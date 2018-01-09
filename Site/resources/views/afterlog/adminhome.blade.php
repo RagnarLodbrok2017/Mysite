@@ -147,5 +147,28 @@
       </div>
       </form>
   </div>
+  <div class="text-center">
+    <div id="formSearch">
+      <br>
+      {!! Form::open(["url"=>"adminhome/search"]) !!}
+      <label for="id">Enter the ID</label>
+      {!! Form::search("id") !!}
+      {!! Form::submit('done', ['class' => 'btn btn-warning'] )!!}
+      @if(isset($user))
+      {!! Form::label('id', $user->name) !!}
+      @endif
+    </div>
+    <button class="btn btn-warning" onclick="showandhide()">Search</button>
+  </div>
 </div>
+<script>
+function showandhide() {
+    var x = document.getElementById("formSearch");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
 @endsection

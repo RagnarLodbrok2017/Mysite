@@ -41,4 +41,13 @@ class AdminController extends Controller
       }
       return back();
     }
+    public function search(Request $request)
+    {
+      $user = User::find($request->id);
+      if($user)
+      {
+        echo "the username is". $user->name;
+      }
+      return back();
+    }
 }

@@ -38,6 +38,7 @@ Route::group(['middleware' => ['admin']], function() {
   Route::post('adminhome/add','AdminController@add');
   Route::get('adminhome/{user}/delete','AdminController@delete');
   Route::post('adminhome/update','AdminController@update');
+  Route::post('adminhome/search','AdminController@search');
 });
 Auth::routes();
 //Route::get('home', 'HomeController@index')->name('home');
