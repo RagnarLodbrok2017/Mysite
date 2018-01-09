@@ -17,8 +17,12 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check() && Auth::user()->usertype == 0) {
+        if (Auth::guard($guard)->check()) {
+          if(Auth::user()->usertype == 0)
             return redirect('/home/products');
+            else {
+              return redirect('/adminhome');
+            }
         }
         return $next($request);
     }

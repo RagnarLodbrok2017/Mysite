@@ -29,4 +29,16 @@ class AdminController extends Controller
       $user->delete();
       return back();
     }
+    public function update(Request $request)
+    {
+      $user = User::find($request->id);
+      if($user)
+      {
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+      }
+      return back();
+    }
 }

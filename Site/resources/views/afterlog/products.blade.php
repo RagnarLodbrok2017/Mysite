@@ -29,7 +29,7 @@
     </div>
   </br>
     <div class="text-center col-xs-12">
-        <form class="col-xs-6" action="products/add" method="POST">
+        <form class="form-horizontal col-xs-6" action="products/add" method="POST">
           {{csrf_field()}}
           <div class="input-group">
             <div class="col-xs-7">
