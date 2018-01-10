@@ -15,6 +15,7 @@
               </tr>
             </thead>
             <tbody>
+              @if(isset($users))
               @foreach ($users as $user)
               <tr>
                 <td>{{ $user->id }}</td>
@@ -25,11 +26,20 @@
                 <td><a href="products/{{$user->id}}/update" type="button" class="btn btn-default">Edit</a></td>
               </tr>
               @endforeach
+              @else
+              <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->password }}</td>
+              </tr>
+              @endif
             </tbody>
           </table>
         </div>
     </div>
   </br>
+  @if(isset($users))
   <div class="text-center col-xs-12">
       <form class="form-horizontal col-xs-6" action="adminhome/add" method="POST">
         {{csrf_field()}}
@@ -147,7 +157,10 @@
       </div>
       </form>
   </div>
-  <div class="text-center">
+</div>
+  @endif
+  <div class="text-center" style="margin-top:40px;">
+    <button class="btn btn-warning" onclick="showandhide()">Search</button>
     <div id="formSearch">
       <br>
       {!! Form::open(["url"=>"adminhome/search"]) !!}
@@ -158,7 +171,9 @@
       {!! Form::label('id', $user->name) !!}
       @endif
     </div>
-    <button class="btn btn-warning" onclick="showandhide()">Search</button>
+  </div>
+  <div class="text-center" style="margin-top:60px;">
+    <a href="/adminhome" class="btn btn-danger btn-lg">Back</a>
   </div>
 </div>
 <script>

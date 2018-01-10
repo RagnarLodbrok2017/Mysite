@@ -29,37 +29,50 @@
     </div>
   </br>
     <div class="text-center col-xs-12">
-      <div class="">
-      </div>
         <form class="form-horizontal col-xs-8" action="products/add" method="POST">
           {{csrf_field()}}
+          <div class="input-group col-xs-5">
+            <div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
+              </div>
+              <div class="form-group">
+                <input class="form-control" type="text" name="price" value="" placeholder="price of Product:">
+              </div>
+              <div class="form-group">
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('name') }}</strong>
+                    </span>
+                @endif
+              </div>
+              <div class="form-group">
+                @if ($errors->has('price'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('price') }}</strong>
+                    </span>
+                @endif
+              </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">Add Product</button>
+            </span>
+          </div>
+    </div>
+        </div>
+        </form>
+        <form class="col-xs-4" action="products/searchResult" method="POST">
+          {{csrf_field()}}
           <div class="input-group">
-            <div class="col-xs-7">
-          <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
-          <input class="form-control" type="text" name="price" value="" placeholder="price of Product:">
+            <div class="col-xs-10">
+          <input class="form-control" type="text" name="name" placeholder="Name of Product:">
           @if ($errors->has('name'))
               <span class="help-block">
                   <strong class="alert alert-danger">{{ $errors->first('name') }}</strong>
               </span>
           @endif
-          @if ($errors->has('price'))
-              <span class="help-block">
-                  <strong class="alert alert-danger">{{ $errors->first('price') }}</strong>
-              </span>
-          @endif
-        </div>
-        <div class="col-xs-5">
-          <span class="input-group-btn">
-				<button class="btn btn-success" type="submit">Add Product</button>
-			</span>
-    </div>
-        </div>
-        </form>
-        <form class="col-xs-4" action="products/{{$product->name}}/edit" method="GET">
-          {{csrf_field()}}
-          <div class="input-group">
-            <div class="col-xs-10">
-          <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
         </div>
         <div class="col-xs-2">
           <span class="input-group-btn">
@@ -68,6 +81,9 @@
     </div>
         </div>
         </form>
+    </div>
+    <div class="text-center" style="margin-top:120px;">
+      <a href="/" class="btn btn-warning btn-lg">Back</a>
     </div>
 </div>
 @endsection

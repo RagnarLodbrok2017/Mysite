@@ -49,5 +49,5 @@ Route::post('home/products/add','UsersController@add');
 Route::get('home/products/{product}/edit','UsersController@edit');
 Route::post('home/products/{product}/update','UsersController@update');
 //Route::get('home/products/search','UsersController@search');
-Route::get('home/products/{product}/edit/search','UsersController@search');
+Route::any('home/products/searchResult','UsersController@search');
 });

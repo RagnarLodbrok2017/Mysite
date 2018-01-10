@@ -55,9 +55,21 @@ class UsersController extends Controller
     $product->update($request->all());
     return redirect('home/products');;
   }
-  public function search(Products $product)
+  public function search(Request $request)
   {
-    return view('afterlog.edit',compact('product'));
+    $this->validate($request,[
+      'name'=>'required|max:20|string|regex:/^[A-Za-z\s-_]+$/',
+    ]);
+    $product = DB::table('products')->where('name', $request->name)->first();
+    //echo $fproduct;
+    if($product){
+      return view('afterlog.searchResult',compact('product'));
+    }
+    else {
+      $product = new Products();
+      $product->name = "sorry -_-  There is no product with this name: " . $request->name;
+      return view('afterlog.searchResult',compact('product'));
+    }
   }
   /*public function search(Request $request)
   {

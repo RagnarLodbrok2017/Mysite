@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
 use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
@@ -43,10 +44,10 @@ class AdminController extends Controller
     }
     public function search(Request $request)
     {
-      $user = User::find($request->id);
+      $user = DB::table('users')->where('id', $request->id)->first();
       if($user)
       {
-        echo "the username is". $user->name;
+        return view("afterlog.adminhome", compact('user'));
       }
       return back();
     }
