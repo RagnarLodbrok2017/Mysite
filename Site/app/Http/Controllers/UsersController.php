@@ -8,12 +8,17 @@ use DB;
 use Illuminate\Support\Facades\Input;
 class UsersController extends Controller
 {
-  
+
   public function add(Request $request)
   {
-    $products = DB::table('products')->get();
-    foreach ($products as $product) {
-      if($product->name != $request->name)
+    $this->validate($request,[
+      'name'=>'required|max:20|string|regex:/^[A-Za-z\s-_]+$/',
+      'price'=>'required|max:1000|integer|numeric',
+    ]);
+    $product = DB::table('products')->where('name', $request->name)->first();
+    //$products = DB::table('products')->get();
+    //foreach ($products as $product) {
+      if(!$product)
       {
         $product = new Products();
         if(is_string($request->name) &&  is_numeric($request->price))
@@ -28,9 +33,8 @@ class UsersController extends Controller
       }
     }
     else {
-      return redirect('home');
+      return redirect('home/products');
     }
-  }
   }
   public function show()
   {

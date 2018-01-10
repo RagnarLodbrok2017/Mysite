@@ -29,12 +29,24 @@
     </div>
   </br>
     <div class="text-center col-xs-12">
-        <form class="form-horizontal col-xs-6" action="products/add" method="POST">
+      <div class="">
+      </div>
+        <form class="form-horizontal col-xs-8" action="products/add" method="POST">
           {{csrf_field()}}
           <div class="input-group">
             <div class="col-xs-7">
           <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
           <input class="form-control" type="text" name="price" value="" placeholder="price of Product:">
+          @if ($errors->has('name'))
+              <span class="help-block">
+                  <strong class="alert alert-danger">{{ $errors->first('name') }}</strong>
+              </span>
+          @endif
+          @if ($errors->has('price'))
+              <span class="help-block">
+                  <strong class="alert alert-danger">{{ $errors->first('price') }}</strong>
+              </span>
+          @endif
         </div>
         <div class="col-xs-5">
           <span class="input-group-btn">
@@ -43,7 +55,7 @@
     </div>
         </div>
         </form>
-        <form class="col-xs-6" action="products/{{$product->name}}/edit" method="GET">
+        <form class="col-xs-4" action="products/{{$product->name}}/edit" method="GET">
           {{csrf_field()}}
           <div class="input-group">
             <div class="col-xs-10">
