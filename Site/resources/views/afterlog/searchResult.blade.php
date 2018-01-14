@@ -13,6 +13,8 @@
                   <th scope="col">Name</th>
                   <th scope="col">Price</th>
                   <th scope="col">Image</th>
+                  <th scope="col">Supplier ID</th>
+                  <th scope="col">Supplier Name</th>
                 </tr>
               </thead>
               <tbody>
@@ -20,7 +22,9 @@
                   <td>{{ $product->id }}</td>
                   <td>{{ $product->name }}</td>
                   <td>{{ $product->price }}</td>
-                  <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="width:120px;hight:120px;"></td>
+                  <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="margin-left: 0px; width:120px;hight:120px;"></td>
+                  <td>{{ $product->supplier_id }}</td>
+                  <td>{{$product->supplier->name}}</td>
                 </tr>
               </tbody>
             </table>

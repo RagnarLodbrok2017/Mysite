@@ -24,7 +24,8 @@ $factory->define(App\User::class, function (Faker $faker) {
 $factory->define('App\Products', function(Faker $faker){
   return [
     'name' => $faker->unique()->name,
-    'price' => mt_rand(50,500),
+    'price' => mt_rand(10,100),
     'image' => "name.jpg",
+    'supplier_id'=> mt_rand(1,5),
   ];
 });

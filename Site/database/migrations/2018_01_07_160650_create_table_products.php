@@ -17,6 +17,10 @@ class CreateTableProducts extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('price')->unsigned();
+            $table->string('image');
+            $table->string('document');
+            $table->integer('supplier_id')->unsigned();
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->timestamps();
         });
     }

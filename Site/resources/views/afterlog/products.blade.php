@@ -11,6 +11,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Image</th>
+                <th scope="col">Supplier</th>
                 <th class="text-center" scope="col">Action</th>
               </tr>
             </thead>
@@ -20,7 +21,10 @@
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
-                <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="width:80px;hight:80px;"></td>
+                <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="margin-left:0;width:80px;hight:80px;"></td>
+                <td style="font-size:17px;"><p><code>ID:</code>{{ $product->supplier_id }}</p>
+                  <p><code>Name:</code>{{ $product->supplier->name }}</p>
+                </td>
                 <td><a href="products/{{$product->id}}/delete" type="button" class="btn btn-danger">Delete</a></td>
                 <td><a href="products/{{$product->id}}/edit" type="button" class="btn btn-default">Edit</a></td>
               </tr>
@@ -45,6 +49,20 @@
                 <input class="form-control" type="text" name="price" value="" placeholder="price of Product:">
               </div>
               <div class="form-group">
+                <label for="">Supplier ID: </label>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <select name="supplier" class="form-control">
+                      @if(isset($suppliers))
+                      @foreach($suppliers as $supplier)
+                      <option value="{{$supplier->id}}">{{$supplier->id}}</option>
+                      @endforeach
+                      @endif
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
                 <label for="img">Select image to Upload: </label>
                 <input class="form-control" type="file" name="image" id ="image" value="">
                 <input type="hidden" value="{{ csrf_token()}}" name="_token">
@@ -65,6 +83,13 @@
                 @if ($errors->has('price'))
                     <span class="help-block">
                         <strong class="alert alert-danger">{{ $errors->first('price') }}</strong>
+                    </span>
+                @endif
+              </div>
+              <div class="form-group">
+                @if ($errors->has('supplier'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('supplier') }}</strong>
                     </span>
                 @endif
               </div>
