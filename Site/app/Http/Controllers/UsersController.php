@@ -57,7 +57,7 @@ class UsersController extends Controller
   //function Show
   public function show()
   {
-    $products = DB::table('products')->get();
+    $products = Products::paginate(6,["name","price","image"]);
     return view('afterlog.products', compact('products'));
   }
   public function delete(Products $product)

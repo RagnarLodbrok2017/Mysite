@@ -28,6 +28,9 @@
             </tbody>
           </table>
         </div>
+        <div class="row text-center">
+          {{ $products->render() }}
+        </div>
     </div>
   </br>
     <div class="text-center col-xs-12">
