@@ -8,7 +8,7 @@
       <h3>ID: {{$product->id}}</h3>
       <h3>Name: {{$product->name}}</h3>
       <h3>Price: {{$product->price}}</h3>
-      <h3>Image: <img src = {{ asset("uploads/$product->name.jpg") }} alt="" class="img-rounded thumbnai center-block" style="width:100px;hight:100px;"></h3>
+      <h3>Image: <img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="width:100px;hight:100px;"></h3>
     </div>
     <form class="form-horizontal col-md-4 col-md-offset-4 centered" action="update" method="POST" enctype="multipart/form-data">
       {{csrf_field()}}

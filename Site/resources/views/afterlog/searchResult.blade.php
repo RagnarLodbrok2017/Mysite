@@ -20,7 +20,7 @@
                   <td>{{ $product->id }}</td>
                   <td>{{ $product->name }}</td>
                   <td>{{ $product->price }}</td>
-                  <td><img src = {{ asset("uploads/$product->name.jpg") }} alt="" class="img-rounded thumbnai center-block" style="width:120px;hight:120px;"></td>
+                  <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="width:120px;hight:120px;"></td>
                 </tr>
               </tbody>
             </table>

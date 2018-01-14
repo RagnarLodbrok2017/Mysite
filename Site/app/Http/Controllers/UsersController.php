@@ -18,6 +18,7 @@ class UsersController extends Controller
       'name'=>'required|max:20|string|regex:/^[A-Za-z\s-_]+$/',
       'price'=>'required|max:1000|integer|numeric',
       'image' => 'required | mimes:jpeg,png,jpg | max:10000',
+      'doc' => 'mimes:txt, | max:1000',
     ]);
     $product = DB::table('products')->where('name', $request->name)->first();
     //$products = DB::table('products')->get();
@@ -32,9 +33,15 @@ class UsersController extends Controller
             $imageName = $request->name . '.' .$imagePro->getClientOriginalExtension();
             $imagePro->move('uploads/',$imageName);
           }
+          if(Input::hasFile('doc')){
+            $doc = input::file('doc');
+            $docName = $request->name . '.' .$doc->getClientOriginalExtension();
+            $doc->move(public_path('uploads/'), $docName);
+            $product->document = $docName;
+          }
           $product->name = $request->name;
           $product->price = $request->price;
-          $product->image = $request->image;
+          $product->image = $imageName;
           $product->save();
           return back();
       }
@@ -46,6 +53,8 @@ class UsersController extends Controller
       return redirect('home/products');
     }
   }
+
+  //function Show
   public function show()
   {
     $products = DB::table('products')->get();
@@ -60,6 +69,8 @@ class UsersController extends Controller
   {
     return view('afterlog.edit',compact('product'));
   }
+
+  //function update
   public function update(Request $request, Products $product)
   {
     $this->validate($request,[
@@ -72,7 +83,17 @@ class UsersController extends Controller
       $imageName = $request->name . '.' . $imagePro->getClientOriginalExtension();
       $imagePro->move('uploads/',$imageName);
     }else {
-      File::move("uploads/$product->name.jpg", "uploads/$request->name.jpg");
+      $imagechars = explode(".",$product->image);
+      $i = 0;
+      foreach ($imagechars as $imagechar) {
+        if($imagechar == 'jpg' || $imagechar == 'jpeg' || $imagechar == 'png'){
+          $extension = $imagechars[$i];
+        }
+        $i++;
+      }
+      $imageNewName = "$request->name.$extension";
+      File::move("uploads/$product->image", "uploads/$imageNewName");
+      $product->image = $imageNewName;
     }
     $product->update($request->all());
     return redirect('home/products');

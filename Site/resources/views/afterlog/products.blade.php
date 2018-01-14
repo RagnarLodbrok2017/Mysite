@@ -20,7 +20,7 @@
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
-                <td><img src = {{ asset("uploads/$product->name.jpg") }} alt="" class="img-rounded thumbnai center-block" style="width:80px;hight:80px;"></td>
+                <td><img src = {{ asset("uploads/$product->image") }} alt="" class="img-rounded thumbnai center-block" style="width:80px;hight:80px;"></td>
                 <td><a href="products/{{$product->id}}/delete" type="button" class="btn btn-danger">Delete</a></td>
                 <td><a href="products/{{$product->id}}/edit" type="button" class="btn btn-default">Edit</a></td>
               </tr>
@@ -33,7 +33,7 @@
     <div class="text-center col-xs-12">
         <form class="form-horizontal col-xs-8" action="products/add" method="POST" enctype="multipart/form-data">
           {{csrf_field()}}
-          <div class="input-group col-xs-5">
+          <div class="input-group col-xs-6">
             <div>
               <div class="form-group">
                 <input class="form-control" type="text" name="name" value="" placeholder="Name of Product:">
@@ -44,6 +44,11 @@
               <div class="form-group">
                 <label for="img">Select image to Upload: </label>
                 <input class="form-control" type="file" name="image" id ="image" value="">
+                <input type="hidden" value="{{ csrf_token()}}" name="_token">
+              </div>
+              <div class="form-group">
+                <label for="document">Select Documentation to Upload Must be in type (txt): </label>
+                <input class="form-control" type="file" name="doc" id ="doc" value="">
                 <input type="hidden" value="{{ csrf_token()}}" name="_token">
               </div>
               <div class="form-group">
@@ -64,6 +69,13 @@
                 @if ($errors->has('image'))
                     <span class="help-block">
                         <strong class="alert alert-danger">{{ $errors->first('image') }}</strong>
+                    </span>
+                @endif
+              </div>
+              <div class="form-group">
+                @if ($errors->has('doc'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('doc') }}</strong>
                     </span>
                 @endif
               </div>
