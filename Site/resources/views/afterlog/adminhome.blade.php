@@ -23,7 +23,6 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->password }}</td>
                 <td><a href="adminhome/{{$user->id}}/delete" type="button" class="btn btn-danger">Delete</a></td>
-                <td><a href="products/{{$user->id}}/update" type="button" class="btn btn-default">Edit</a></td>
               </tr>
               @endforeach
               @else

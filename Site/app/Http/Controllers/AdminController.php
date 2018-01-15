@@ -15,9 +15,14 @@ class AdminController extends Controller
     }
     public function add(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
       $data = array("name"=>$request->name, "email"=>$request->email, "password"=>$request->password);
       $user = new User();
-      app('App\Http\Controllers\Auth\RegisterController')->validator($data);
+      //app('App\Http\Controllers\Auth\RegisterController')->validator($data);
       app('App\Http\Controllers\Auth\RegisterController')->create($data);
       //$user->name = $request->name;
       //$user->email = $request->email;
@@ -32,6 +37,11 @@ class AdminController extends Controller
     }
     public function update(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
       $user = User::find($request->id);
       if($user)
       {
